@@ -1,0 +1,19 @@
+{
+  "schema": {
+    "name": "task",
+    "kind": "collectionType",
+    "attributes": {
+      "title": {
+        "type": "string",
+        "required": true
+      },
+      "description": {
+        "type": "text"
+      },
+      "done": {
+        "type": "boolean",
+        "default": false
+      }
+    }
+  }
+}
