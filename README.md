@@ -61,3 +61,4 @@ docker run -p 1337:1337 strapi-app
 # test trigger
 # Trigger CI
  
+# test trigger
