@@ -31,4 +31,5 @@ jobs:
         run: docker push zayn63/strapi:${{ env.TAG }}
 
       - name: Output Image Tag
+   
         run: echo "tag=${{ env.TAG }}" >> $GITHUB_OUTPUT
