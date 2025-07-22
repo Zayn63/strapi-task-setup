@@ -5,3 +5,7 @@ dist
 .strapi
 public/uploads/*
 !public/uploads/.gitkeep
+*.tfstate
+*.tfvars
+.terraform/
+strapi-key.pem
