@@ -25,7 +25,8 @@ jobs:
         run: echo "TAG=$(echo $GITHUB_SHA | cut -c1-7)" >> $GITHUB_ENV
 
       - name: Build Docker Image
-        run: docker build -t zayn63/strapi:${{ env.TAG }} .
+        run: docker build -t your-image-name -f docker/Dockerfile .
+.
 
       - name: Push Docker Image
         run: docker push zayn63/strapi:${{ env.TAG }}
