@@ -1,9 +1,4 @@
-variable "aws_access_key" {
-  description = "AWS access key"
-  type        = string
-}
-
-variable "aws_secret_key" {
-  description = "AWS secret key"
+variable "docker_image" {
+  description = "Docker image to deploy"
   type        = string
 }
