@@ -28,6 +28,7 @@ jobs:
       - name: Build and Push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: ./docker
+          file: ./docker/Dockerfile
           push: true
           tags: zayn63/strapi:${{ steps.vars.outputs.tag }}
