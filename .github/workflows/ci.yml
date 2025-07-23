@@ -32,4 +32,5 @@ jobs:
           docker push zayn63/strapi:latest
 
       - name: Output image tag
-        run: echo "Built and pushed image tag: ${{ env.TAG }}"
+        run: |
+          echo "Built and pushed image tag: ${{ env.TAG }}"
