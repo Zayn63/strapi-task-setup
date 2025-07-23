@@ -8,7 +8,7 @@ variable "image_tag" {
 }
 
 resource "aws_instance" "strapi" {
-  ami                    = "ami-0fe8bec493a81c7da"
+  ami                    = "ami-0fe8bec493a81c7da" # Ubuntu AMI in eu-north-1
   instance_type          = "t3.micro"
   key_name               = "zayn-key"
   vpc_security_group_ids = ["sg-0e0fc6d36b1f4d4ae"]
@@ -18,7 +18,7 @@ resource "aws_instance" "strapi" {
               apt update -y
               apt install -y docker.io
               systemctl start docker
-              docker run -d -p 80:1337 --name strapi ${var.image_tag}
+              docker run -d -p 80:1337 --name strapi ghcr.io/zayn63/strapi:${var.image_tag}
               EOF
 
   tags = {
