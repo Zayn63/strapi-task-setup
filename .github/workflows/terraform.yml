@@ -30,8 +30,8 @@ jobs:
 
       - name: Build and Push Docker Image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/strapi:${{ secrets.IMAGE_TAG }} .
-          docker push ${{ secrets.DOCKER_USERNAME }}/strapi:${{ secrets.IMAGE_TAG }}
+         docker buildx build -t ${{ secrets.DOCKER_USERNAME }}/strapi:${{ secrets.IMAGE_TAG }} . --push
+
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v3
