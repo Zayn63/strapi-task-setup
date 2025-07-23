@@ -1,17 +1,19 @@
-name: Build and Push Strapi Docker Image
+name: CI - Build and Push Strapi Docker Image
 
 on:
   push:
     branches:
-      - zayn-strapi-set  # Your working branch
+      - zayn-strapi-set  # Your deployment branch
+
+env:
+  TAG: ${{ github.sha }}
 
 jobs:
-  build:
-    name: Build and Push Docker Image
+  build-and-push:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Set up Docker Buildx
@@ -23,16 +25,11 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Extract short SHA
-        id: vars
-        run: echo "TAG=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
-
       - name: Build and Push Docker image
         run: |
-          docker build -t zayn63/strapi:${{ env.TAG }} -t zayn63/strapi:latest ./docker
+          docker build -f docker/Dockerfile -t zayn63/strapi:${{ env.TAG }} -t zayn63/strapi:latest .
           docker push zayn63/strapi:${{ env.TAG }}
           docker push zayn63/strapi:latest
 
-      - name: Set image tag output
-        id: image_tag
-        run: echo "::set-output name=tag::${{ env.TAG }}"
+      - name: Output image tag
+        run: echo "Built and pushed image tag: ${{ env.TAG }}"
