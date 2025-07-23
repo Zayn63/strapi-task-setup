@@ -1,13 +1,15 @@
-name: CI - Build and Push Docker Image
+name: Build and Push Strapi Docker Image
 
 on:
   push:
     branches:
-      - zayn-strapi-set
+      - zayn-strapi-set  # Your working branch
 
 jobs:
   build:
+    name: Build and Push Docker Image
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -23,19 +25,14 @@ jobs:
 
       - name: Extract short SHA
         id: vars
-        run: echo "TAG=build-$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+        run: echo "TAG=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
       - name: Build and Push Docker image
         run: |
-          docker build -t zayn63/strapi:${{ env.TAG }} .
+          docker build -t zayn63/strapi:${{ env.TAG }} -t zayn63/strapi:latest ./docker
           docker push zayn63/strapi:${{ env.TAG }}
+          docker push zayn63/strapi:latest
 
-      - name: Upload image tag as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: image-tag
-          path: |
-            .github/image-tag.txt
-
-      - name: Save image tag for Terraform
-        run: echo "${{ env.TAG }}" > image-tag.txt
+      - name: Set image tag output
+        id: image_tag
+        run: echo "::set-output name=tag::${{ env.TAG }}"
