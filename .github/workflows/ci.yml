@@ -23,9 +23,7 @@ jobs:
 
       - name: Extract short commit SHA
         id: vars
-        run: |
-          echo "tag=$(echo $GITHUB_SHA | cut -c1-7)" >> $GITHUB_OUTPUT
-          echo "Using Docker tag: strapi:$(echo $GITHUB_SHA | cut -c1-7)"
+        run: echo "tag=$(echo $GITHUB_SHA | cut -c1-7)" >> $GITHUB_OUTPUT
 
       - name: Build and Push Docker image
         uses: docker/build-push-action@v5
