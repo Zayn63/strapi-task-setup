@@ -3,7 +3,11 @@
 name: CD - Deploy with Terraform
 
 on:
+  push:
+    branches:
+      - zayn-strapi-set
   workflow_dispatch:
+
 
 jobs:
   deploy:
