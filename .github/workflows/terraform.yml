@@ -1,3 +1,5 @@
+# .github/workflows/terraform.yml
+
 name: CD - Deploy with Terraform
 
 on:
@@ -30,18 +32,18 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
           aws-region: ${{ env.AWS_REGION }}
 
-      - name: Initialize Terraform
+      - name: Terraform Init
         run: terraform init
-        working-directory: ./docker/terraform
+        working-directory: ./terraform
 
       - name: Format Check
         run: terraform fmt -check
-        working-directory: ./docker/terraform
+        working-directory: ./terraform
 
       - name: Terraform Plan
         run: terraform plan -var="docker_username=${{ secrets.DOCKER_USERNAME }}" -var="docker_password=${{ secrets.DOCKER_PASSWORD }}"
-        working-directory: ./docker/terraform
+        working-directory: ./terraform
 
       - name: Terraform Apply
         run: terraform apply -auto-approve -var="docker_username=${{ secrets.DOCKER_USERNAME }}" -var="docker_password=${{ secrets.DOCKER_PASSWORD }}"
-        working-directory: ./docker/terraform
+        working-directory: ./terraform
