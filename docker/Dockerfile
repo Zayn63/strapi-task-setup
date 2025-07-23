@@ -1,20 +1,17 @@
-FROM node:18-alpine
+# Use the official Node.js LTS image
+FROM node:18
 
 # Set working directory
 WORKDIR /app
 
-# Install required packages
-RUN apk add --no-cache python3 make g++
-
-# Copy package files and install dependencies
-COPY package*.json ./
-RUN npm install
-
-# Copy rest of the files
+# Copy all files into container
 COPY . .
 
-# Expose port
+# Install dependencies
+RUN npm install
+
+# Expose port used by Strapi
 EXPOSE 1337
 
-# Run Strapi in production
+# Start the Strapi application
 CMD ["npm", "start"]
