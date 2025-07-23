@@ -22,15 +22,20 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
+      - name: Debug Docker tag
+        run: |
+          echo "Docker Username: '${{ secrets.DOCKER_USERNAME }}'"
+          echo "Tag: '${{ secrets.DOCKER_USERNAME }}/strapi-app:latest'"
+
       - name: Build and push Docker image
-        uses: docker/build-push-action@v5
-        with:
-          context: ./Strapi-app
-          push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/strapi-app:latest
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/strapi-app:latest ./Strapi-app
+          docker push ${{ secrets.DOCKER_USERNAME }}/strapi-app:latest
 
       - name: Save latest tag as artifact
-        run: echo "latest" > image-tag.txt
+        run: |
+          echo "latest" > image-tag.txt
+        shell: bash
 
       - name: Upload image tag
         uses: actions/upload-artifact@v4
