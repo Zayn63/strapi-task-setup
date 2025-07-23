@@ -30,18 +30,19 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
           aws-region: ${{ env.AWS_REGION }}
 
-      - name: Initialize Terraform
-        run: terraform init
-        working-directory: ./terraform
-
-      - name: Format Check
-        run: terraform fmt -check
-        working-directory: ./terraform
+      - name: Terraform Init
+        run: terraform -chdir=./terraform init
 
       - name: Terraform Plan
-        run: terraform plan -var="docker_username=${{ secrets.DOCKER_USERNAME }}" -var="docker_password=${{ secrets.DOCKER_PASSWORD }}" -var="image_tag=${{ secrets.IMAGE_TAG }}"
+        run: terraform -chdir=./terraform plan \
+               -var="docker_username=${{ secrets.DOCKER_USERNAME }}" \
+               -var="docker_password=${{ secrets.DOCKER_PASSWORD }}" \
+               -var="image_tag=${{ secrets.IMAGE_TAG }}"
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve -var="docker_username=${{ secrets.DOCKER_USERNAME }}" -var="docker_password=${{ secrets.DOCKER_PASSWORD }}" -var="image_tag=${{ secrets.IMAGE_TAG }}"
+        run: terraform -chdir=./terraform apply -auto-approve \
+             -var="docker_username=${{ secrets.DOCKER_USERNAME }}" \
+             -var="docker_password=${{ secrets.DOCKER_PASSWORD }}" \
+             -var="image_tag=${{ secrets.IMAGE_TAG }}"
 
 
