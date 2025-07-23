@@ -39,10 +39,9 @@ jobs:
         working-directory: ./terraform
 
       - name: Terraform Plan
-        run: terraform plan -var="docker_username=${{ secrets.DOCKER_USERNAME }}" -var="docker_password=${{ secrets.DOCKER_PASSWORD }}" -var="docker_image=zayn63/strapi:latest"
-        working-directory: ./terraform
+        run: terraform plan -var="docker_username=${{ secrets.DOCKER_USERNAME }}" -var="docker_password=${{ secrets.DOCKER_PASSWORD }}" -var="image_tag=${{ secrets.IMAGE_TAG }}"
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve -var="docker_username=${{ secrets.DOCKER_USERNAME }}" -var="docker_password=${{ secrets.DOCKER_PASSWORD }}" -var="docker_image=zayn63/strapi:latest"
-        working-directory: ./terraform
+        run: terraform apply -auto-approve -var="docker_username=${{ secrets.DOCKER_USERNAME }}" -var="docker_password=${{ secrets.DOCKER_PASSWORD }}" -var="image_tag=${{ secrets.IMAGE_TAG }}"
+
 
