@@ -1,14 +1,20 @@
-FROM node:20
+FROM node:18-alpine
 
+# Set working directory
 WORKDIR /app
 
-COPY package*.json ./
+# Install required packages
+RUN apk add --no-cache python3 make g++
 
+# Copy package files and install dependencies
+COPY package*.json ./
 RUN npm install
+
+# Copy rest of the files
 COPY . .
 
-RUN npm run build
-
+# Expose port
 EXPOSE 1337
 
-CMD ["npm", "run", "start"]
+# Run Strapi in production
+CMD ["npm", "start"]
