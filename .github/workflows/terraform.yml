@@ -30,7 +30,7 @@ jobs:
 
       - name: Build and Push Docker Image
         run: |
-         docker buildx build -t ${{ secrets.DOCKER_USERNAME }}/strapi:${{ secrets.IMAGE_TAG }} . --push
+          docker buildx build -t ${{ secrets.DOCKER_USERNAME }}/strapi:${{ secrets.IMAGE_TAG }} . --push
 
 
       - name: Set up Terraform
