@@ -5,37 +5,36 @@ on:
 
 jobs:
   deploy:
+    name: Deploy Strapi on EC2
     runs-on: ubuntu-latest
+
+    env:
+      AWS_REGION: eu-north-1
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.5.7  # Adjust version as needed
 
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v3
+        uses: aws-actions/configure-aws-credentials@v2
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          region: eu-north-1
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
 
-      - name: Download image tag
-        uses: actions/download-artifact@v4
-        with:
-          name: image-tag
-          path: .
+      - name: Initialize Terraform
+        run: terraform init
 
-      - name: Load image tag
-        id: tag
-        run: |
-          echo "IMAGE_TAG=$(cat image-tag.txt)" >> $GITHUB_ENV
-
-      - name: Terraform Init
-        run: terraform -chdir=terraform init
+      - name: Format Check
+        run: terraform fmt -check
 
       - name: Terraform Plan
-        run: terraform -chdir=terraform plan -var="image_tag=${{ env.IMAGE_TAG }}"
+        run: terraform plan -var="docker_username=${{ secrets.DOCKER_USERNAME }}" -var="docker_password=${{ secrets.DOCKER_PASSWORD }}"
 
       - name: Terraform Apply
-        run: terraform -chdir=terraform apply -auto-approve -var="image_tag=${{ env.IMAGE_TAG }}"
+        run: terraform apply -auto-approve -var="docker_username=${{ secrets.DOCKER_USERNAME }}" -var="docker_password=${{ secrets.DOCKER_PASSWORD }}"
