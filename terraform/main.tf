@@ -2,6 +2,11 @@ provider "aws" {
   region = "eu-north-1"
 }
 
+variable "image_tag" {
+  description = "Docker image tag to deploy"
+  type        = string
+}
+
 resource "aws_instance" "strapi" {
   ami                    = "ami-0fe8bec493a81c7da"
   instance_type          = "t3.micro"
@@ -13,7 +18,7 @@ resource "aws_instance" "strapi" {
               apt update -y
               apt install -y docker.io
               systemctl start docker
-              docker run -d -p 80:1337 --name strapi ${var.docker_image}
+              docker run -d -p 80:1337 --name strapi ${var.image_tag}
               EOF
 
   tags = {
