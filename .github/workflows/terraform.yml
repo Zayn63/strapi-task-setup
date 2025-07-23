@@ -38,16 +38,11 @@ jobs:
         run: terraform fmt -check
         working-directory: ./terraform
 
-      - name: Terraform Plan
-        run: terraform plan \
-          -var="docker_username=${{ secrets.DOCKER_USERNAME }}" \
-          -var="docker_password=${{ secrets.DOCKER_PASSWORD }}" \
-          -var="docker_image=zayn63/strapi:latest"
+           - name: Terraform Plan
+        run: terraform plan -var="docker_username=${{ secrets.DOCKER_USERNAME }}" -var="docker_password=${{ secrets.DOCKER_PASSWORD }}" -var="docker_image=zayn63/strapi:latest"
         working-directory: ./terraform
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve \
-          -var="docker_username=${{ secrets.DOCKER_USERNAME }}" \
-          -var="docker_password=${{ secrets.DOCKER_PASSWORD }}" \
-          -var="docker_image=zayn63/strapi:latest"
+        run: terraform apply -auto-approve -var="docker_username=${{ secrets.DOCKER_USERNAME }}" -var="docker_password=${{ secrets.DOCKER_PASSWORD }}" -var="docker_image=zayn63/strapi:latest"
         working-directory: ./terraform
+
