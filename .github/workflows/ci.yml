@@ -5,12 +5,12 @@ on:
     branches:
       - zayn-strapi-set  # Your deployment branch
 
-env:
-  TAG: ${{ github.sha }}
-
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+
+    env:
+      TAG: ${{ github.sha }}
 
     steps:
       - name: Checkout repository
