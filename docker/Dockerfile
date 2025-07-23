@@ -1,19 +1,14 @@
-FROM strapi/strapi:latest
+FROM node:20
 
-# Set the working directory to where Strapi expects your app
-WORKDIR /srv/app
+WORKDIR /app
 
-# Copy only necessary files
-COPY ./package.json ./package-lock.json ./
+COPY package*.json ./
 
-# Install production dependencies
-RUN npm install --production
-
-# Copy the rest of your Strapi project (API, config, etc.)
+RUN npm install
 COPY . .
 
-# Expose the Strapi default port
+RUN npm run build
+
 EXPOSE 1337
 
-# Start the Strapi server
-CMD ["npm", "start"]
+CMD ["npm", "run", "start"]
