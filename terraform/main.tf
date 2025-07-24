@@ -8,7 +8,7 @@ variable "image_tag" {
 }
 
 resource "aws_instance" "strapi" {
-  ami                    = "ami-0fe8bec493a81c7da" # Ubuntu AMI in eu-north-1
+  ami                    = "ami-0fe8bec493a81c7da"
   instance_type          = "t3.micro"
   key_name               = "zayn-key"
   vpc_security_group_ids = ["sg-0e0fc6d36b1f4d4ae"]
