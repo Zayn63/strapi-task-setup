@@ -15,13 +15,29 @@ resource "aws_instance" "strapi" {
 
   user_data = <<-EOF
               #!/bin/bash
-              apt update -y
-              apt install -y docker.io
-              systemctl start docker
-              docker run -d -p 80:1337 --name strapi ghcr.io/zayn63/strapi:${var.image_tag}
+              exec > >(tee /var/log/user-data.log | logger -t user-data) 2>&1
+
+              echo "Updating system..."
+              sudo apt update -y
+
+              echo "Installing Docker..."
+              sudo apt install -y docker.io
+
+              echo "Starting Docker service..."
+              sudo systemctl start docker
+
+              echo "Running Strapi Docker container..."
+              sudo docker run -d -p 80:1337 --name strapi ghcr.io/zayn63/strapi:${var.image_tag}
+
+              echo "Deployment complete."
               EOF
 
   tags = {
     Name = "Strapi-Deployed-Instance"
   }
+}
+
+output "instance_public_ip" {
+  description = "Public IP of the deployed Strapi instance"
+  value       = aws_instance.strapi.public_ip
 }
