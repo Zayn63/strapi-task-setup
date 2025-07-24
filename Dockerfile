@@ -5,7 +5,7 @@ FROM node:18-alpine
 WORKDIR /app
 
 # Copy package.json and package-lock.json
-COPY package*.json ./
+COPY package.json package-lock.json ./
 
 # Install dependencies
 RUN npm install
@@ -13,7 +13,7 @@ RUN npm install
 # Copy the rest of the application
 COPY . .
 
-# Build Strapi Admin (if using admin panel)
+# Build Strapi Admin (important for production)
 RUN npm run build
 
 # Expose the default Strapi port
