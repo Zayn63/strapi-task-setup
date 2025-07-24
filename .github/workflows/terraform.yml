@@ -32,13 +32,19 @@ jobs:
 
       - name: Terraform Plan
         working-directory: ${{ env.TF_WORKING_DIR }}
-        run: terraform plan -var="image_name=${{ env.IMAGE_NAME }}" -var="image_tag=${{ github.event.inputs.image_tag }}"
+        run: |
+          terraform plan \
+            -var="image_name=${{ env.IMAGE_NAME }}" \
+            -var="image_tag=${{ github.event.inputs.image_tag }}"
 
       - name: Terraform Apply
         working-directory: ${{ env.TF_WORKING_DIR }}
-        run: terraform apply -auto-approve -var="image_name=${{ env.IMAGE_NAME }}" -var="image_tag=${{ github.event.inputs.image_tag }}"
+        run: |
+          terraform apply -auto-approve \
+            -var="image_name=${{ env.IMAGE_NAME }}" \
+            -var="image_tag=${{ github.event.inputs.image_tag }}"
 
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      AWS_DEFAULT_REGION: eu-north-1  # ✅ Updated region
+      AWS_DEFAULT_REGION: eu-north-1
