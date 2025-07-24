@@ -3,7 +3,7 @@ name: CI - Build and Push Docker Image
 on:
   push:
     branches:
-      - main
+      - zayn-strapi-set
   workflow_dispatch:
 
 env:
