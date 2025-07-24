@@ -56,5 +56,5 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
           AWS_DEFAULT_REGION: eu-north-1
-        run: terraform apply -auto-approve
+        run: terraform apply -auto-approve -var="image_tag=${{ env.IMAGE_TAG }}"
         working-directory: terraform
