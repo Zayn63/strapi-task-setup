@@ -3,7 +3,3 @@ variable "image_tag" {
   type        = string
 }
 
-variable "docker_image" {
-  description = "Docker image to deploy"
-  type        = string
-}
