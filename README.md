@@ -57,6 +57,5 @@ This internship has strengthened my skills in real-world DevOps practices, AWS c
 
 ## 👨‍💻 Author
 
-**Name:** _[Your Name]_  
-**Internship Duration:** _[Insert Start – End Date]_  
+**Name:** _ Zayn Mansuri
 **Location:** Remote  
