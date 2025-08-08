@@ -1,5 +1,5 @@
 {
-  "name": "my-project",
+  "name": "z-task-10-app",
   "version": "0.1.0",
   "private": true,
   "description": "A Strapi application",
@@ -15,10 +15,11 @@
     "upgrade:dry": "npx @strapi/upgrade latest --dry"
   },
   "dependencies": {
-    "@strapi/plugin-cloud": "5.18.0",
-    "@strapi/plugin-users-permissions": "5.18.0",
-    "@strapi/strapi": "5.18.0",
+    "@strapi/plugin-cloud": "5.21.0",
+    "@strapi/plugin-users-permissions": "5.21.0",
+    "@strapi/strapi": "5.21.0",
     "better-sqlite3": "11.3.0",
+    "pg": "^8.16.3",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.0.0",
@@ -35,7 +36,7 @@
     "npm": ">=6.0.0"
   },
   "strapi": {
-    "uuid": "f4ace19c-08b2-41ae-9d94-037eb15a634e",
-    "installId": "87c4216b35e5108c1870f79911b7ef096c0105e02839017c797316b95ce68737"
+    "uuid": "331f74ec-3fc7-4e96-8533-7ec400b7b996",
+    "installId": "339869f1f3c436b9f29778dcd8d3de718823a44f207227fcdc04989152dd3938"
   }
 }
