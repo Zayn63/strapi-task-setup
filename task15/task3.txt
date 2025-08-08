@@ -1,0 +1,54 @@
+# Task 3 – Docker Compose: Strapi + PostgreSQL + Nginx
+
+## 📝 Objective
+
+To run Strapi in a production-like multi-container setup using Docker Compose. This included:
+- A Strapi container
+- A PostgreSQL container (as the database)
+- An Nginx container (as a reverse proxy)
+
+---
+
+## ⚙️ What We Did
+
+1. **Created a `docker-compose.yml` file** with three services:
+   - `strapi`: The main CMS application.
+   - `postgres`: Used as Strapi’s database.
+   - `nginx`: Used to reverse proxy Strapi to port 80 for easy access.
+
+2. Defined a custom **Docker network** to enable communication between containers.
+
+3. **Configured environment variables** for Strapi to connect to PostgreSQL (host, port, DB name, user, password).
+
+4. Used a **named volume** for PostgreSQL to persist data.
+
+5. Added a custom **Nginx config file** to forward traffic from `localhost:80` to `strapi:1337`.
+
+6. Started all services with:
+
+   ```bash
+   docker-compose up --build
+Opened http://localhost in the browser and verified the Strapi admin panel was accessible.
+
+🧠 Learnings
+Learned how to use Docker Compose to manage multi-container applications.
+
+Understood how to connect containers via a shared network.
+
+Gained practical experience writing an Nginx reverse proxy configuration.
+
+Saw how Strapi detects and connects to external databases via environment variables.
+
+🚧 Challenges Faced
+Initially faced database connection errors due to incorrect environment variables.
+
+Nginx didn’t forward requests correctly at first — needed to debug port and host config.
+
+Had to ensure PostgreSQL was fully ready before Strapi started (solved with depends_on and retries).
+
+✅ Outcome
+Successfully deployed Strapi with PostgreSQL and Nginx using Docker Compose.
+
+Able to access the app via http://localhost.
+
+Learned to simulate a real-world deployment locally.

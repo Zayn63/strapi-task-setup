@@ -1,0 +1,37 @@
+# Task 10 – Configure Strapi Content Types, Roles & Test Public API
+
+## 📝 Objective
+
+To test the full functionality of our ECS-deployed Strapi app by:
+- Creating a custom content type.
+- Adding content entries.
+- Configuring public permissions.
+- Accessing content via the public API through ALB.
+
+---
+
+## ⚙️ What We Did
+
+1. **Accessed the Strapi Admin Panel** using the ALB DNS name on port 80.
+2. **Created a new content type** called `Article` with fields:
+   - `title` (Text)
+   - `body` (Rich Text)
+   - `published` (Boolean)
+3. **Added multiple entries** into the new content type from the admin dashboard.
+4. **Updated public permissions** under Roles & Permissions:
+   - Allowed `find` and `findOne` on `Article` for the `public` role.
+5. **Verified the API response**:
+   - Used browser and tools like `curl` or Postman to hit:
+     ```
+     http://<ALB-DNS>/api/articles
+     ```
+   - Confirmed JSON output of articles.
+
+---
+
+## 🧠 Learnings
+
+- Learned how Strapi uses role-based access control for public/private APIs.
+- Understood how content types are modular and can be added without code.
+- Saw how ALB integration made the app accessible securely from the internet.
+- Gained clarity on structuring RESTful endpoi

@@ -1,0 +1,50 @@
+# Task 7 – Automate ECS Deployment via GitHub Actions
+
+## 📝 Objective
+
+To automate the full ECS deployment process using GitHub Actions by:
+- Building and pushing the Docker image to ECR.
+- Tagging it using the commit SHA.
+- Updating the ECS Task Definition with the new image.
+- Re-deploying the ECS service using the new revision.
+
+---
+
+## ⚙️ What We Did
+
+1. **Set up GitHub Actions workflow** triggered on push to the `main` branch.
+2. In the workflow:
+   - Checked out the code.
+   - Configured AWS credentials using GitHub Secrets.
+   - Logged in to ECR.
+   - Built the Docker image and tagged it with `${{ github.sha }}`.
+   - Pushed the image to ECR.
+3. Used the AWS CLI within the same workflow to:
+   - Register a new ECS task definition revision.
+   - Update the ECS service to use the new revision.
+   - Optionally verify the deployment status using `describe-services`.
+
+---
+
+## 🧠 Learnings
+
+- Learned how to use GitHub Actions to perform both CI and CD in a single pipeline.
+- Understood how to register a new ECS task definition revision using `aws ecs register-task-definition`.
+- Gained experience dynamically injecting image tags and avoiding hardcoded values.
+- Realized the importance of automation for frequent and reliable deployments.
+
+---
+
+## 🚧 Challenges Faced
+
+- The task definition JSON formatting was tricky when updated inline — resolved using templated files or AWS CLI parameters.
+- Faced IAM permission issues while updating ECS service (fixed by adjusting GitHub Actions role).
+- The ECS service sometimes needed a force deployment trigger when the image tag didn’t reflect instantly.
+
+---
+
+## ✅ Outcome
+
+- Achieved seamless CI/CD from code commit to live ECS deployment.
+- New image tags were automatically picked up by ECS without manual intervention.
+- GitHub Actions became the central control point for infrastructure updates and deployments.

@@ -1,0 +1,55 @@
+# Task 5 – Automate Strapi Deployment with GitHub Actions + Terraform
+
+## 📝 Objective
+
+To set up a CI/CD pipeline using GitHub Actions that:
+- Builds and pushes the Strapi Docker image to a container registry.
+- Deploys the image to an EC2 instance using Terraform.
+
+---
+
+## ⚙️ What We Did
+
+### 1. CI Pipeline (`ci.yml`)
+- Created a GitHub Actions workflow triggered on push to the `main` branch.
+- Steps included:
+  - Checkout code.
+  - Log in to Docker Hub.
+  - Build and tag the Docker image.
+  - Push the image to Docker Hub with a unique tag (commit SHA).
+
+### 2. CD Pipeline (`terraform.yml`)
+- Created a separate GitHub Actions workflow triggered manually (`workflow_dispatch`).
+- Steps included:
+  - Checkout repo.
+  - Configure AWS credentials using GitHub Secrets.
+  - Run `terraform init`, `plan`, and `apply` to deploy the latest image.
+
+### 3. Terraform Integration
+- Updated Terraform scripts to pull the Docker image from Docker Hub using the dynamic tag from CI workflow.
+- Used EC2 `user_data` to run the new image whenever the workflow was triggered.
+
+---
+
+## 🧠 Learnings
+
+- Understood how to split CI and CD pipelines using separate workflows.
+- Learned how to use GitHub Actions secrets for Docker Hub and AWS credentials securely.
+- Got experience passing values (like image tags) between workflows.
+- Practiced Terraform automation triggered directly from version control.
+
+---
+
+## 🚧 Challenges Faced
+
+- Faced issues while using `${{ github.sha }}` directly in Terraform; had to ensure proper formatting.
+- Needed to avoid hardcoding image names and tags in Terraform.
+- Debugged permission errors while pushing to Docker Hub (fixed via secrets and login step).
+
+---
+
+## ✅ Outcome
+
+- Fully automated Strapi build and deploy pipeline using GitHub Actions and Terraform.
+- Able to trigger infrastructure deployment from the GitHub UI.
+- Reduced manual steps and improved deployment consistency.

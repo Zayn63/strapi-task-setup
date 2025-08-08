@@ -1,0 +1,48 @@
+# Task 1 – Strapi Setup & Content Creation
+
+## 📝 Objective
+
+The goal of this task was to set up the Strapi CMS locally, understand its folder structure, and create a sample content type using the admin panel.
+
+---
+
+## 
+
+1. **Cloned the Strapi GitHub repository** to get started with the official codebase.
+2. Installed all dependencies using `yarn install` to set up the local environment.
+3. Started the development server using `yarn develop`.
+4. On the first run, we were prompted to create an admin user, which allowed us access to the admin panel.
+5. From the admin panel, we created a content type named **"BlogPost"** with the following fields:
+   - `Title` (Text)
+   - `Body` (Rich Text)
+   - `Published` (Boolean)
+6. After saving and deploying the content type, we tested it by creating a new entry.
+7. Explored the folder structure to better understand how Strapi organizes its backend and frontend:
+   - `./src` – Custom code and content types.
+   - `./admin` – Admin panel frontend (React-based).
+   - `./config` – Environment-specific configurations.
+8. Finally, initialized a Git repo and pushed the code to our personal GitHub repository.
+
+---
+
+## 🧠 Learnings
+
+- Learned how to run a CMS locally using Node.js and Yarn.
+- Understood how content types are created visually through the admin panel.
+- Got familiar with the file structure of a Strapi project.
+- Observed how changes in the admin panel affect the project schema in real time.
+
+---
+
+## 🚧 Challenges Faced
+
+- Initial `yarn` install took time due to dependency resolution.
+- Understanding which files are auto-generated versus custom code took some exploration.
+
+---
+
+## ✅ Outcome
+
+- Successfully set up and ran Strapi locally.
+- Created a working content type.
+- Understood how the admin panel interacts with the backend.

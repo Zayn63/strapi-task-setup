@@ -1,0 +1,56 @@
+# Task 2 – Dockerize the Strapi Application
+
+## 📝 Objective
+
+The goal of this task was to containerize the Strapi CMS using Docker so it could run consistently across different environments.
+
+---
+
+## ⚙️ What We Did
+
+1. Created a custom `Dockerfile` to define how the Strapi application should be built into a container.
+2. Used the official `node:18-alpine` image as a lightweight base image.
+3. Installed all project dependencies using `yarn install`.
+4. Configured the container to expose port `1337` — the default port for Strapi.
+5. Added `.dockerignore` to avoid copying unnecessary files into the image.
+6. Built the Docker image locally using:
+
+   ```bash
+   docker build -t strapi-app .
+
+
+
+Ran the container using:
+
+bash
+Copy code
+docker run -p 1337:1337 strapi-app
+Accessed Strapi via http://localhost:1337 and verified it worked correctly inside the container.
+
+🧠 Learnings
+Learned how to write a basic Dockerfile for a Node.js application.
+
+Understood how to optimize the image using alpine base.
+
+Realized the importance of .dockerignore to reduce image size and build time.
+
+Gained experience with Docker commands like build, run, and port mapping.
+
+🚧 Challenges Faced
+Needed to ensure proper volume management to persist data (optional but important for production).
+
+Initially forgot to expose the correct port, which caused connection issues.
+
+✅ Outcome
+Successfully containerized the Strapi app.
+
+Could run it consistently via Docker on any system.
+
+Ready for further deployments using this image.
+
+yaml
+Copy code
+
+---
+
+Let me know when you're ready for **Task 3**, and I’ll send the next file

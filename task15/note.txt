@@ -1,0 +1,5 @@
+
+Due to persistent technical issues with my GitHub account (fatal errors preventing PR creation), I was unable to raise any pull requests during the internship.
+As a workaround, I have been committing all task work directly into the shared internship repository.
+This ensured continuity and timely submission of every task.
+

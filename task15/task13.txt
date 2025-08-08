@@ -1,0 +1,54 @@
+
+
+✅ Task 13 – Docker Swarm Cronjobs Research & Documentation
+📝 Objective
+To research and document how to schedule and run cron-like jobs in Docker Swarm, including practical examples, configurations, and visuals.
+
+📚 What We Completed
+Researched Docker Swarm Cronjobs
+
+Explored how Docker Swarm lacks native cronjob support
+
+Documented popular workarounds, including:
+
+Using cron on manager nodes with docker service update or docker service scale
+
+Using third-party tools like Swarm Cronjob, GoCrond, or external schedulers (e.g., Jenkins, GitHub Actions)
+
+Created a Practical Example
+
+Built a small cron-based Docker Swarm job (e.g., a container running echo every minute)
+
+Used a host-based cron to trigger a Docker Swarm service
+
+Captured and Included Screenshots
+
+Added terminal outputs and logs showing:
+
+Cron entry
+
+Docker service creation
+
+Output logs from the scheduled job
+
+Wrote a Detailed Documentation File
+
+Markdown format
+
+Sections: Introduction, Why It’s Needed, Methods, Step-by-step Example, Screenshots, Conclusion
+
+GitHub Contribution
+
+Pushed the documentation to the repo under task13/
+
+Raised a clean and descriptive Pull Request as per the project's standards
+
+✅ Result
+Completed technical research on Docker Swarm Cronjobs
+
+Created working examples with screenshots
+
+Delivered a well-organized document
+
+PR successfully raised and merged into the main branch
+

@@ -1,0 +1,46 @@
+# Task 6 – Deploy Strapi on AWS ECS Fargate Using Terraform
+
+## 📝 Objective
+
+The goal of this task was to deploy the Strapi application on Amazon ECS using the **Fargate** launch type, fully managed through Terraform.
+
+---
+
+## ⚙️ What We Did
+
+1. **Containerized the Strapi app** (reused the Dockerfile from earlier tasks).
+2. **Pushed the Docker image to Amazon ECR** (Elastic Container Registry).
+3. Wrote Terraform code to:
+   - Create an **ECS cluster**.
+   - Define an **ECS Task Definition** using the image from ECR.
+   - Create an **ECS Fargate Service** to run the container.
+   - Set up an **Application Load Balancer (ALB)** with a listener on port 80.
+   - Configure a **Security Group** to allow HTTP traffic to the ALB.
+   - Set up required **IAM roles and policies** for ECS execution.
+
+4. Accessed the Strapi app via the ALB’s DNS URL.
+
+---
+
+## 🧠 Learnings
+
+- Understood how ECS Fargate abstracts away the need to manage EC2 instances.
+- Learned how to use Terraform to manage containerized app deployment on AWS.
+- Learned about different AWS services: ECS, ECR, ALB, IAM, and how they interconnect.
+- Observed the benefits of using ALB with ECS for dynamic scaling and traffic routing.
+
+---
+
+## 🚧 Challenges Faced
+
+- Needed to ensure the ECS Task Role had the right permissions to pull from ECR and log to CloudWatch.
+- Initial deployments failed due to misconfigured security groups.
+- Spent time understanding how to attach the ALB target group correctly to the ECS service.
+
+---
+
+## ✅ Outcome
+
+- Successfully deployed Strapi on ECS using Fargate launch type.
+- The app was publicly accessible via an ALB DNS endpoint.
+- No EC2 instances were required — everything was serverless and managed.

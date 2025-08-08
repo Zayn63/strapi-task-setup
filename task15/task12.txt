@@ -1,0 +1,65 @@
+# Task 12 – Setup GitHub Actions CI/CD with ECR, ECS, and CodeDeploy
+
+## 📝 Objective
+
+To fully automate deployment of our Strapi app to ECS using:
+- GitHub Actions for CI/CD
+- Amazon ECR for container image storage
+- ECS Task Definition updates
+- AWS CodeDeploy for safe blue/green deployments
+
+---
+
+## ⚙️ What We Did
+
+### 1. Created a GitHub Actions workflow `.github/workflows/deploy.yml` that:
+- Builds the Docker image for Strapi
+- Pushes it to our ECR repo tagged with Git commit SHA
+- Updates the ECS Task Definition with the new image
+- Triggers a deployment using CodeDeploy
+
+### 2. ECR Setup
+- Created ECR repo via Terraform named `z-strapi-repo`
+- Configured credentials in GitHub Secrets:
+  - `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`
+  - `AWS_REGION`, `ECR_REPOSITORY`, `ECS_CLUSTER_NAME`, `ECS_SERVICE_NAME`, `TASK_DEFINITION`
+
+### 3. Terraform Infrastructure
+- Added `aws_codedeploy_app` and `aws_codedeploy_deployment_group`
+- Updated ECS service with `deployment_controller` set to `"CODE_DEPLOY"`
+
+### 4. CodeDeploy Hooks (Optional)
+- Defined lifecycle hooks in AppSpec for pre-traffic/post-traffic validation
+- Used sample scripts or left hooks empty if no validation needed
+
+### 5. Deployment Process
+- On every push to `main`, the pipeline:
+  - Builds the image
+  - Tags & pushes to ECR
+  - Registers new Task Definition
+  - Triggers CodeDeploy deployment
+
+---
+
+## 🧠 Learnings
+
+- Gained full-stack knowledge of CI/CD flow from GitHub to AWS.
+- Understood how ECS integrates with CodeDeploy for zero-downtime updates.
+- Practiced Docker, GitHub Actions, Terraform, and AWS CLI all in one task.
+- Learned the importance of proper IAM permissions, secrets, and Git tagging.
+
+---
+
+## 🚧 Challenges Faced
+
+- Debugged IAM issues related to CodeDeploy permissions.
+- Faced delays when ECS service was not using the correct deployment controller.
+- Had to match JSON field structure in Task Definition for GitHub Action update to succeed.
+
+---
+
+## ✅ Outcome
+
+- CI/CD pipeline is now fully automated.
+- Code push to `main` = image built → pushed → deployed on ECS → traffic shifted safely.
+- Deployment is safe, repeatable, and rollback-friendly via CodeDeploy.

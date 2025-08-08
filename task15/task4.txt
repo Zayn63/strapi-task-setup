@@ -1,0 +1,52 @@
+# Task 4 – Deploy Strapi on EC2 Using Terraform and Docker
+
+## 📝 Objective
+
+The goal of this task was to provision an EC2 instance using Terraform, install Docker on it via user data, and deploy the Strapi application using the Docker image.
+
+---
+
+## ⚙️ What We Did
+
+1. **Wrote Terraform scripts** to:
+   - Launch a new EC2 instance (Amazon Linux 2).
+   - Attach a security group with access to port 80 and 22.
+   - Use a key pair for SSH access.
+
+2. **Used a user data script** to automate:
+   - System updates and Docker installation.
+   - Starting Docker service.
+   - Pulling the Strapi Docker image from Docker Hub.
+   - Running the container with port mapping (`80:1337`).
+
+3. Applied the Terraform configuration using:
+
+   ```bash
+   terraform init
+   terraform apply
+Once the EC2 instance was up, we accessed it using the public IP.
+
+Verified that Strapi was successfully running by opening the public IP in a browser.
+
+🧠 Learnings
+Understood how to automate infrastructure provisioning with Terraform.
+
+Learned how to use EC2 user_data to bootstrap and configure an instance.
+
+Gained hands-on experience with combining IaaC and containerization.
+
+Saw how to expose Docker containers publicly via EC2.
+
+🚧 Challenges Faced
+Needed to open port 80 in the security group to allow web access.
+
+Docker took some time to start on the first boot due to updates in user data.
+
+Had to debug why the container wasn’t running initially (typo in Docker image name).
+
+✅ Outcome
+Deployed a Dockerized Strapi app on AWS EC2 fully through Terraform.
+
+Could access the admin panel through EC2’s public IP.
+
+Achieved end-to-end automation of infrastructure + app deployment.

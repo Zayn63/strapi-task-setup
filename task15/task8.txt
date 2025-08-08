@@ -1,0 +1,63 @@
+# Task 8 – Add CloudWatch Monitoring for ECS (Logs + Metrics)
+
+## 📝 Objective
+
+To enhance observability of the ECS-deployed Strapi application by:
+- Enabling logging to CloudWatch Logs.
+- Monitoring key ECS metrics like CPU and memory utilization.
+- Optionally setting up CloudWatch alarms for alerts.
+
+---
+
+## ⚙️ What We Did
+
+### 1. CloudWatch Log Group
+- Used Terraform to create a log group named `/ecs/strapi`.
+- Updated the ECS Task Definition to use the `awslogs` log driver:
+  - `awslogs-group`: `/ecs/strapi`
+  - `awslogs-region`: `eu-north-1`
+  - `awslogs-stream-prefix`: `ecs`
+
+### 2. Metrics Collection
+- Enabled the default ECS metrics at the service level:
+  - CPUUtilization
+  - MemoryUtilization
+  - TaskCount
+  - NetworkIn / NetworkOut
+
+### 3. Alarms (Optional)
+- Created Terraform resources for CloudWatch Alarms on:
+  - High CPU (> 70%)
+  - High Memory (> 75%)
+- Configured alarms to trigger when thresholds were breached for 2 evaluation periods.
+
+### 4. Validation
+- Deployed the updated infrastructure.
+- Opened the CloudWatch console to confirm:
+  - Logs were being streamed under `/ecs/strapi`.
+  - Metrics were visible in ECS and CloudWatch dashboards.
+
+---
+
+## 🧠 Learnings
+
+- Learned how to use the `awslogs` driver with ECS Fargate.
+- Understood the basic ECS metrics and how they help monitor container health.
+- Gained hands-on experience writing Terraform for CloudWatch alarms.
+- Saw the value of proactive monitoring and alerting in production systems.
+
+---
+
+## 🚧 Challenges Faced
+
+- Initially forgot to add IAM permissions for ECS task role to publish logs.
+- Had to ensure log group existed **before** deploying the ECS Task Definition.
+- Alarm threshold tuning required multiple adjustments for realistic usage.
+
+---
+
+## ✅ Outcome
+
+- Enabled centralized logging via CloudWatch Logs.
+- Configured real-time metrics for CPU and memory usage.
+- Optionally set up alerts to catch abnormal application behavior early.

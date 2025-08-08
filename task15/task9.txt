@@ -1,0 +1,44 @@
+# Task 9 – Deploy Strapi on ECS using Fargate Spot
+
+## 📝 Objective
+
+To optimize infrastructure cost by switching from **Fargate (on-demand)** to **Fargate Spot**, while keeping the ECS deployment structure mostly the same.
+
+---
+
+## ⚙️ What We Did
+
+1. **Updated the ECS Service definition** in Terraform:
+   - Set `capacity_provider_strategy` with `FARGATE_SPOT`.
+   - Gave full weight to `FARGATE_SPOT` and removed `FARGATE` provider.
+2. **Retained all previous configuration**:
+   - ALB for traffic routing.
+   - CloudWatch Logs for observability.
+   - ECR for container images.
+   - IAM roles and security groups.
+3. **Tested availability** of the Strapi app through the ALB endpoint after deployment.
+
+---
+
+## 🧠 Learnings
+
+- Understood how **Fargate Spot** works: offers the same serverless container deployment experience at up to 70% reduced cost.
+- Learned to define capacity provider strategy in ECS services via Terraform.
+- Observed the limitations of Fargate Spot (e.g., **may be interrupted**, no guaranteed availability).
+- Realized that Fargate Spot is a good fit for dev/test or non-critical workloads.
+
+---
+
+## 🚧 Challenges Faced
+
+- Initially forgot to associate the `FARGATE_SPOT` capacity provider with the ECS cluster (fixed via Terraform).
+- Deployment failed until we removed the default `launch_type = "FARGATE"` setting.
+- Had to monitor ECS logs to ensure service stability under Spot conditions.
+
+---
+
+## ✅ Outcome
+
+- Strapi successfully deployed on **Fargate Spot**, reducing compute cost.
+- Retained all previous features: ALB access, monitoring, logging.
+- Infrastructure is now more cost-efficient without sacrificing performance for dev use.

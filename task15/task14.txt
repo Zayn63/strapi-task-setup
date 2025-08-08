@@ -1,0 +1,64 @@
+Task 14 – Unleash Documentation for React App Integration
+📝 Objective
+To create clear and concise documentation explaining:
+
+What Unleash is used for
+
+How to set it up for a local React-based application
+
+📘 What We Completed
+Researched and Documented What Unleash Is
+
+Unleash is an open-source feature flag management tool
+
+It helps teams enable or disable features at runtime without deploying code
+
+Useful for A/B testing, gradual rollouts, and safe deployments
+
+Explained Key Concepts
+
+Feature toggles
+
+Strategies (e.g., gradual rollout, user IDs, etc.)
+
+Unleash server and client architecture
+
+Setup for Local React Development
+
+Installed and ran the Unleash self-hosted server using Docker
+
+Documented the setup of a React app integrated with Unleash SDK
+
+Created and connected a feature toggle (e.g., showWelcomeMessage) in the Unleash UI
+
+Demonstrated toggling features dynamically without redeploying the app
+
+Included Code Examples
+
+React SDK initialization
+
+Conditional rendering using a feature flag
+
+Fetching toggles from the Unleash server
+
+Captured Screenshots
+
+Unleash UI dashboard
+
+Feature flag settings
+
+React app output with feature flag on/off
+
+GitHub Submission
+
+Pushed the complete documentation and assets to the repository under the task14/ directory
+
+Raised a pull request with the title and description according to the project’s standards
+
+✅ Result
+Delivered a complete guide on using Unleash with React
+
+Clear explanation, real examples, and visuals provided
+
+Documentation is now ready for onboarding or future integration work
+
